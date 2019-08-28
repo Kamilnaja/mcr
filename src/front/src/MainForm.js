@@ -1,4 +1,5 @@
 import React from 'react';
+import socketIOClient from "socket.io-client";
 
 export class MainForm extends React.Component {
     constructor(props) {
@@ -6,11 +7,19 @@ export class MainForm extends React.Component {
         this.state = {
             username: '',
             isSubmitted: false,
-            room: ''
+            room: '',
+            response: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleGenerate = this.handleGenerate.bind(this);
+    }
+
+    componentDidMount() {
+        const socket = socketIOClient('hello');
+        socket.on("FromApi", data => this.setState({
+            response: data
+        }))
     }
 
     handleSubmit(event) {

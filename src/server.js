@@ -7,10 +7,15 @@ const server = http.createServer(app);
 const io = socketIo(server);
 const port = 8080;
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'front/build')))
+console.log(__dirname);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(`${__dirname}/front/build/index.html`))
+})
 
 server.listen(port, () => {
-    console.log('listening on * 3000');
+    console.log(`${port}`);
 });
 
 io.on("connection", socket => {
@@ -42,3 +47,4 @@ io.on('chat message', (socket) => {
 });
 
 io.sockets.emit('hi', 'evreyone');
+
