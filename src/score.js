@@ -1,5 +1,0 @@
-class Score {
-    constructor(){
-        value
-    }
-}
