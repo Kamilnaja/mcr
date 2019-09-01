@@ -1,7 +1,14 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import socketIOClient from 'socket.io-client';
+import PropTypes from 'prop-types';
+import utils from '../utils/Utils';
 
 export default class MainForm extends React.Component {
+
+  static propTypes = {
+    socket: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -9,7 +16,6 @@ export default class MainForm extends React.Component {
       isSubmitted: false,
       room: ''
     };
-    this.socket = socketIOClient('http://localhost:80');
   }
 
   handleUserSubmit = (event) => {
@@ -19,7 +25,7 @@ export default class MainForm extends React.Component {
       this.setState({
         isSubmitted: true
       });
-      this.socket.emit('createdNewUser', this.state.username);
+      this.props.socket.emit(utils.createdNewUser, this.state.username);
     } else {
       console.log('Please enter your username');
     }
@@ -33,10 +39,10 @@ export default class MainForm extends React.Component {
   }
 
   handleGenerate = () => {
-    this.socket.emit('createNewRoom', this.state.username);
+    this.props.socket.emit('createNewRoom', this.state.username);
   }
 
-  handleRoomEnter = () =>  { }
+  handleRoomEnter = () => { }
 
   render() {
     return (

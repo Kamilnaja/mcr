@@ -13,6 +13,7 @@
     "react/jsx-filename-extension": "off",
     "react/destructuring-assignment": [
       "never"
-    ]
+    ],
+    "import/prefer-default-export": "off"
   }
 }
