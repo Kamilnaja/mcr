@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './app.css';
 import socketIOClient from 'socket.io-client';
 import MainForm from './MainForm';
-import RoomsList from './RoomsList';
+import RoomsList from './rooms/RoomsList';
 import utils from '../utils/Utils';
 
 export default class App extends Component {

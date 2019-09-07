@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserNameForm from './UserNameForm';
+import RoomForm from './rooms/RoomForm';
 
 export default class MainForm extends React.Component {
   static propTypes = {
@@ -13,17 +14,13 @@ export default class MainForm extends React.Component {
     this.state = {
       username: '',
       room: '',
-      isFormVisible: false
+      isFormVisible: !localStorage.getItem('username')
     };
-  }
-
-  componentDidMount() {
-
   }
 
   handleRoomEnter = () => { }
 
-  handleGenerate = () => {
+  generateNewRoom = () => {
     this.props.socket.emit('createNewRoom', this.state.username);
   }
 
@@ -31,10 +28,6 @@ export default class MainForm extends React.Component {
     this.setState({
       isFormVisible: value
     });
-  }
-
-  broadcastState = () => {
-
   }
 
   render() {
@@ -63,30 +56,11 @@ export default class MainForm extends React.Component {
                     </button>
                   </div>
                 </div>
+                <hr />
               </section>
             )
         }
-
-        <section>
-          {
-            this.state.isSubmitted
-              ? (
-                <div>
-                  <h1>
-                    Username:
-                    {this.state.username}
-                  </h1>
-                  <div>
-                    <button onClick={this.handleGenerate} type="button">Create new room</button>
-                  </div>
-                  <div>
-                    So, you can connect into:
-                    <a href={this.state.room} onClick={() => this.handleRoomEnter}>{this.state.room}</a>
-                  </div>
-                </div>
-              )
-              : ''}
-        </section>
+        <RoomForm socket={this.props.socket} />
       </>
     );
   }

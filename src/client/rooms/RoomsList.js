@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import utils from '../utils/Utils';
+import utils from '../../utils/Utils';
 
 export default class RoomsList extends PureComponent {
   static propTypes = {
