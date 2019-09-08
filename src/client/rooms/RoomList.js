@@ -20,7 +20,6 @@ export default class RoomsList extends PureComponent {
       this.setState({
         rooms: data.roomList
       });
-      console.log(this.state.rooms.roomList);
     });
   }
 
