@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import utils from '../../utils/Utils';
 import Room from './Room';
+import { SocketContext } from '../SocketContext';
 
 export default class RoomsList extends PureComponent {
-  static propTypes = {
-    socket: PropTypes.object.isRequired
-  }
+  static contextType = SocketContext;
 
   constructor() {
     super();
@@ -17,8 +15,8 @@ export default class RoomsList extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.socket.emit(utils.getRooms);
-    this.props.socket.on(utils.getRooms, (data) => {
+    this.context.emit(utils.getRooms);
+    this.context.on(utils.getRooms, (data) => {
       this.setState({
         rooms: data.roomList
       });

@@ -1,12 +1,8 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserNameForm from './UserNameForm';
 
 export default class MainForm extends React.Component {
-  static propTypes = {
-    socket: PropTypes.object.isRequired
-  }
 
   constructor(props) {
     super(props);
@@ -31,7 +27,6 @@ export default class MainForm extends React.Component {
           this.state.isFormVisible
             ? (
               <UserNameForm
-                socket={this.props.socket}
                 isSubmitted={this.state.isSubmitted}
                 toggleFormVisible={this.toggleFormVisible}
               />

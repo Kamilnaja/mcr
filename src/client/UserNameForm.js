@@ -1,15 +1,15 @@
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import './app.css';
 import PropTypes from 'prop-types';
+import { SocketContext } from './SocketContext';
 import utils from '../utils/Utils';
 
 export default class UserNameForm extends Component {
   static propTypes = {
     toggleFormVisible: PropTypes.func.isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    socket: PropTypes.any.isRequired
   }
+
+  static contextType = SocketContext;
 
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ export default class UserNameForm extends Component {
 
     if (this.state.username !== '') {
       localStorage.setItem('username', this.state.username);
-      this.props.socket.emit(utils.createdNewUser, this.state.username);
+      this.context.emit(utils.createdNewUser, this.state.username);
       this.props.toggleFormVisible(false);
     } else {
       console.log('Please enter your username');
