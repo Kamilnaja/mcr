@@ -1,7 +1,6 @@
 const utils = {
   createdNewUser: 'createdNewUser',
-  createRoom: 'createNewRoom',
-  getRooms: 'getNewRooms',
+  getRooms: 'getRooms',
   alert: 'alert'
 };
 

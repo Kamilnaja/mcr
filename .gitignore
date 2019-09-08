@@ -3,3 +3,6 @@ node_modules
 dist
 *.log
 yarn.lock
+todo.md
+cheatsheet.md
+todo.todo

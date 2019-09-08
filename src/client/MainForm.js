@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserNameForm from './UserNameForm';
-import RoomForm from './rooms/RoomForm';
 
 export default class MainForm extends React.Component {
   static propTypes = {
@@ -13,16 +12,11 @@ export default class MainForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      room: '',
       isFormVisible: !localStorage.getItem('username')
     };
   }
 
   handleRoomEnter = () => { }
-
-  generateNewRoom = () => {
-    this.props.socket.emit('createNewRoom', this.state.username);
-  }
 
   toggleFormVisible = (value) => {
     this.setState({
@@ -60,7 +54,6 @@ export default class MainForm extends React.Component {
               </section>
             )
         }
-        <RoomForm socket={this.props.socket} />
       </>
     );
   }

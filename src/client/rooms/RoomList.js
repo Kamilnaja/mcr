@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import utils from '../../utils/Utils';
@@ -18,11 +17,10 @@ export default class RoomsList extends PureComponent {
   componentDidMount() {
     this.props.socket.emit(utils.getRooms);
     this.props.socket.on(utils.getRooms, (data) => {
-      console.log('start');
-
       this.setState({
-        rooms: data.rooms
+        rooms: data.roomList
       });
+      console.log(this.state.rooms.roomList);
     });
   }
 
@@ -34,8 +32,8 @@ export default class RoomsList extends PureComponent {
           {
             this.state.rooms.map(item =>
               (
-                <li key={item}>
-                  <a href={item}>{item}</a>
+                <li key={item.id}>
+                  <a href={item}>{item.name}</a>
                 </li>
               ))
           }
