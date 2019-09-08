@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import utils from '../../utils/Utils';
+import Room from './Room';
 
 export default class RoomsList extends PureComponent {
   static propTypes = {
@@ -25,19 +27,27 @@ export default class RoomsList extends PureComponent {
 
   render() {
     return (
-      <div>
-        <h2>Lista dostępnych pokoi</h2>
-        <ul>
-          {
-            this.state.rooms.map(item =>
-              (
-                <li key={item.id}>
-                  <a href={item}>{item.name}</a>
-                </li>
-              ))
-          }
-        </ul>
-      </div>
+      <Router>
+        <div>
+          <h2>Lista dostępnych pokoi</h2>
+          <ul>
+            {
+              this.state.rooms.map(item =>
+                (
+                  <li key={item.id}>
+                    <Link to={`/room/${item.name}`}>
+                      {item.name}
+                    </Link>
+                  </li>
+                ))
+            }
+          </ul>
+        </div>
+        <Route
+          path="/room/:name"
+          component={Room}
+        />
+      </Router>
     );
   }
 }

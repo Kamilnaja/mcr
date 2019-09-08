@@ -30,8 +30,6 @@ function handleCreateNewUser(socket) {
 }
 
 io.on('connection', (socket) => {
-
   handleCreateNewUser(socket);
-
   getRooms(socket);
 });

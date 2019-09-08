@@ -1,7 +1,8 @@
 const utils = {
   createdNewUser: 'createdNewUser',
   getRooms: 'getRooms',
-  alert: 'alert'
+  alert: 'alert',
+  roomEnter: 'roomEnter'
 };
 
 module.exports = utils;
