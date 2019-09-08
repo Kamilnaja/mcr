@@ -4,6 +4,7 @@ class Room {
   constructor(name) {
     this.id = id++;
     this.name = name;
+    this.numberOfUsers = 0;
   }
 }
 

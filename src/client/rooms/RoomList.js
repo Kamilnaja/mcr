@@ -33,8 +33,10 @@ export default class RoomsList extends PureComponent {
               this.state.rooms.map(item =>
                 (
                   <li key={item.id}>
-                    <Link to={`/room/${item.name}`}>
+                    <Link to={`/room/${item.name}/${item.id}`}>
                       {item.name}
+                      =
+                      {item.numberOfUsers}
                     </Link>
                   </li>
                 ))
@@ -42,7 +44,7 @@ export default class RoomsList extends PureComponent {
           </ul>
         </div>
         <Route
-          path="/room/:name"
+          path="/room/:name/:id"
           component={Room}
         />
       </Router>
