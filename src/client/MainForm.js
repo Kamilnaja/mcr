@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import UserNameForm from './UserNameForm';
 
 export default class MainForm extends React.Component {

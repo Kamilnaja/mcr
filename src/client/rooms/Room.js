@@ -14,17 +14,28 @@ export default class Room extends React.Component {
   constructor(props) {
     super(props);
     this.params = this.props.match.params;
+    this.state = ({
+      room: ''
+    });
   }
+
 
   componentDidMount() {
     this.context.emit(utils.roomEnter, { user: localStorage.getItem('username'), id: this.params.id });
+    console.log('reloading');
+ }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      room: newProps.match.params.name
+    });
   }
 
   render() {
     return (
       <div>
         Hello in new Room:
-        {this.params.name}
+        {this.state.room}
       </div>
     );
   }

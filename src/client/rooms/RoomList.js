@@ -3,6 +3,7 @@ import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import utils from '../../utils/Utils';
 import Room from './Room';
 import { SocketContext } from '../SocketContext';
+import { Alert } from '../Alert';
 
 export default class RoomsList extends PureComponent {
   static contextType = SocketContext;
@@ -33,6 +34,7 @@ export default class RoomsList extends PureComponent {
               this.state.rooms.map(item =>
                 (
                   <li key={item.id}>
+
                     <Link to={`/room/${item.name}/${item.id}`}>
                       {item.name}
                       =
