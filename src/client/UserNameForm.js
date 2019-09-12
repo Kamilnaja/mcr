@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './app.css';
 import PropTypes from 'prop-types';
 import { SocketContext } from './SocketContext';
-import utils from '../utils/Utils';
+import { utils } from '../utils/Utils';
 
 export default class UserNameForm extends Component {
   static propTypes = {

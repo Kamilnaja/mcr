@@ -5,4 +5,12 @@ const utils = {
   roomEnter: 'roomEnter'
 };
 
-module.exports = utils;
+
+const idMaker = function* idMaker() {
+  let idx = 0;
+  while (true) {
+    yield idx++;
+  }
+}
+
+module.exports = { utils, idMaker };

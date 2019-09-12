@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
-import utils from '../../utils/Utils';
+import { utils } from '../../utils/Utils';
 import Room from './Room';
 import { SocketContext } from '../SocketContext';
 

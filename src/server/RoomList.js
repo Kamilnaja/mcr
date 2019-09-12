@@ -1,11 +1,5 @@
 const Room = require('./Room');
-
-function* idMaker() {
-  let idx = 0;
-  while (true) {
-    yield idx++;
-  }
-}
+const { idMaker } = require('../utils/Utils');
 
 class RoomList {
   constructor() {

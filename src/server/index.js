@@ -1,7 +1,7 @@
 const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const utils = require('../utils/Utils');
+const { utils } = require('../utils/Utils');
 const RoomList = require('./RoomList');
 
 const roomList = new RoomList();
