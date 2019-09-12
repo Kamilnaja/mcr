@@ -3,7 +3,6 @@ import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
 import utils from '../../utils/Utils';
 import Room from './Room';
 import { SocketContext } from '../SocketContext';
-import { Alert } from '../Alert';
 
 export default class RoomsList extends PureComponent {
   static contextType = SocketContext;
@@ -40,6 +39,11 @@ export default class RoomsList extends PureComponent {
                       =
                       {item.numberOfUsers}
                     </Link>
+                    <div>
+                      <b>
+                        {item.id}
+                      </b>
+                    </div>
                   </li>
                 ))
             }

@@ -1,3 +1,12 @@
+const Room = require('./Room');
+
+function* idMaker() {
+  let idx = 0;
+  while (true) {
+    yield idx++;
+  }
+}
+
 class RoomList {
   constructor() {
     this._rooms = [];
@@ -8,6 +17,16 @@ class RoomList {
   }
 
   get rooms() {
+    return this._rooms;
+  }
+
+  createRooms() {
+    const idx = idMaker();
+
+    this._rooms = [];
+    this._rooms.push(new Room('Hrubieszów', idx.next().value));
+    this._rooms.push(new Room('Zosin', idx.next().value));
+    this._rooms.push(new Room('Lublin', idx.next().value));
     return this._rooms;
   }
 }
