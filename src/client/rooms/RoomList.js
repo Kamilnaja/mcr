@@ -23,6 +23,14 @@ export default class RoomsList extends PureComponent {
     });
   }
 
+  addUser = (data) => {
+    console.log('addings');
+    const payload = data;
+
+    payload.userName = localStorage.getItem('username');
+    this.context.emit(utils.roomEnter, payload);
+  }
+
   render() {
     return (
       <Router>
@@ -32,18 +40,17 @@ export default class RoomsList extends PureComponent {
             {
               this.state.rooms.map(item =>
                 (
-                  <li key={item.id}>
-
-                    <Link to={`/room/${item.name}/${item.id}`}>
-                      {item.name}
+                  <li key={item._id}>
+                    <Link to={`/room/${item._name}/${item._id}`} onClick={() => this.addUser(item)}>
+                      {item._name}
                       =
-                      {item.numberOfUsers}
                     </Link>
                     <div>
                       <b>
-                        {item.id}
+                        {item._id}
                       </b>
                     </div>
+                    <div>{item._usersIds.length}</div>
                   </li>
                 ))
             }

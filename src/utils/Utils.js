@@ -11,6 +11,6 @@ const idMaker = function* idMaker() {
   while (true) {
     yield idx++;
   }
-}
+};
 
 module.exports = { utils, idMaker };

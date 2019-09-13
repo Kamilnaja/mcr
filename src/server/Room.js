@@ -1,8 +1,20 @@
 class Room {
   constructor(name, id) {
-    this.id = id;
-    this.name = name;
-    this.numberOfUsers = 0;
+    this._id = id;
+    this._name = name;
+    this._usersIds = [];
+  }
+
+  get usersIds() {
+    return this._usersIds();
+  }
+
+  addUser(id) {
+    if (this._usersIds.some(item => item === id)) {
+      console.log('should not add');
+      return;
+    }
+    this._usersIds.push(id);
   }
 }
 

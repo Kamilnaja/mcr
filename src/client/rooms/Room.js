@@ -15,10 +15,6 @@ export default class Room extends React.Component {
     this.params = this.props.match.params;
   }
 
-  componentDidMount() {
-    this.context.emit(utils.roomEnter, { user: localStorage.getItem('username'), id: this.params.id });
-  }
-
   render() {
     return (
       <div>

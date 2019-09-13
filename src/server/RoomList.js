@@ -6,10 +6,6 @@ class RoomList {
     this._rooms = [];
   }
 
-  addRoom(newRoom) {
-    this._rooms.push(newRoom);
-  }
-
   get rooms() {
     return this._rooms;
   }
@@ -22,6 +18,17 @@ class RoomList {
     this._rooms.push(new Room('Zosin', idx.next().value));
     this._rooms.push(new Room('Lublin', idx.next().value));
     return this._rooms;
+  }
+
+  addUserToRoom(data) {
+    console.log(data);
+
+    const idx = this.rooms.findIndex(item => Number(item._id) === Number(data._id));
+    if (idx !== -1) {
+      this._rooms[idx].addUser(data.userName);
+    } else {
+      console.log('room not found');
+    }
   }
 }
 

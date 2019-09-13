@@ -10,7 +10,6 @@ server.listen(8080);
 
 app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
 
-
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
     console.log('emitting rooms');
@@ -28,7 +27,8 @@ function handleCreateNewUser(socket) {
 
 function handleNewRoomEnter(socket) {
   socket.on(utils.roomEnter, (data) => {
-    console.log(data);
+    roomList.addUserToRoom(data);
+    io.sockets.emit(utils.getRooms, { roomList: roomList.rooms });
   });
 }
 
