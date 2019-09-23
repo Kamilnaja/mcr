@@ -1,8 +1,22 @@
-h1 {
-  color: green;
-}
-
 body {
   text-align: center;
   margin: auto;
+}
+
+.room-items-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.room-item {
+  border-radius: 2px;
+  border: 2px dashed burlywood;
+  display: flex;
+  padding: 15px 20px;
+  justify-content: space-between;
+  max-width: 600px;
+}
+
+.users-count {
+  border-radius: 6px;
 }

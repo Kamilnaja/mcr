@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { utils } from '../../utils/Utils';
 import { SocketContext } from '../SocketContext';
 
 export default class Room extends React.Component {
