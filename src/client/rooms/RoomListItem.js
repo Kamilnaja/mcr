@@ -22,7 +22,15 @@ export default function RoomListItem(props) {
   );
 }
 
-
 RoomListItem.propTypes = {
-  item: PropTypes.object
-}
+  item: PropTypes.shape({
+    _name: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    _usersIds: PropTypes.array.isRequired
+  }),
+  addUser: PropTypes.func.isRequired
+};
+
+RoomListItem.defaultProps = {
+  item: {}
+};
