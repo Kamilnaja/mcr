@@ -25,7 +25,7 @@ export default function RoomListItem(props) {
 RoomListItem.propTypes = {
   item: PropTypes.shape({
     _name: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
+    _id: PropTypes.number.isRequired,
     _usersIds: PropTypes.array.isRequired
   }),
   addUser: PropTypes.func.isRequired

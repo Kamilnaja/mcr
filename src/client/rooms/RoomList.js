@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { utils } from '../../utils/Utils';
-import Room from './Room';
+import Room from './Room/Room';
 import { SocketContext } from '../SocketContext';
 import RoomListItem from './RoomListItem';
 
@@ -25,9 +25,7 @@ export default class RoomsList extends PureComponent {
   }
 
   addUser = (data) => {
-    console.log('addings');
     const payload = data;
-
     payload.userName = localStorage.getItem('username');
     this.context.emit(utils.roomEnter, payload);
   }

@@ -2,7 +2,8 @@ const utils = {
   createdNewUser: 'createdNewUser',
   getRooms: 'getRooms',
   alert: 'alert',
-  roomEnter: 'roomEnter'
+  roomEnter: 'roomEnter',
+  roomLeave: 'roomLeave'
 };
 
 
@@ -13,4 +14,9 @@ const idMaker = function* idMaker() {
   }
 };
 
-module.exports = { utils, idMaker };
+const findById = id => item => item === id;
+const negFindById = id => item => !item === id;
+
+module.exports = {
+  utils, idMaker, findById, negFindById
+};

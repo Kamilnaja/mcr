@@ -32,9 +32,17 @@ function handleNewRoomEnter(socket) {
   });
 }
 
+function handleRoomLeave(socket) {
+  socket.on(utils.roomLeave, (data) => {
+    roomList.removeUserFromRoom(data);
+    io.sockets.emit(utils.getRooms, { roomList: roomList.rooms });
+  });
+}
+
 io.on('connection', (socket) => {
   roomList.createRooms();
   handleCreateNewUser(socket);
   getRooms(socket);
   handleNewRoomEnter(socket);
+  handleRoomLeave(socket);
 });
