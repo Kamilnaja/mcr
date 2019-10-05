@@ -19,7 +19,7 @@ class RoomList {
     return this._rooms;
   }
 
-  removeUserFromRoom(user) {
+  removeUserFromRoom() {
 
   }
 
