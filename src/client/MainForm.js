@@ -35,7 +35,7 @@ export default class MainForm extends React.Component {
                 <div>
                   <h2>Use existing username</h2>
                   <div>
-                    Your existing username is:
+                    Your current username is:
                     {localStorage.getItem('username')}
                   </div>
                   <div>

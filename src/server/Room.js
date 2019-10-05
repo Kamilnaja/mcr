@@ -7,6 +7,14 @@ class Room {
     this._usersIds = [];
   }
 
+  get id() {
+    return this._id;
+  }
+
+  get name() {
+    return this._name;
+  }
+
   get usersIds() {
     return this._usersIds();
   }
