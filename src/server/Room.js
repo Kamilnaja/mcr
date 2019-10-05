@@ -20,10 +20,13 @@ class Room {
   }
 
   addUser(id) {
+    this._usersIds.push('hello');
+    console.log('adding ');
+    console.log(id);
+
     if (this.checkIfUserIsAlreadyAdded()) {
       return;
     }
-    this._usersIds.push(id);
   }
 
   checkIfUserIsAlreadyAdded() {

@@ -1,11 +1,6 @@
 const Room = require('./Room');
 const { idMaker } = require('../utils/Utils');
 
-const userAction = {
-  removeUser: 'removeUser',
-  addUser: 'addUser'
-};
-
 class RoomList {
   constructor() {
     this._rooms = [];
@@ -32,15 +27,22 @@ class RoomList {
     const { user, room } = data;
     this.removeUserFromOtherRooms(user);
     const roomIdx = this.rooms.findIndex(item => item._id === room.id);
-    this.rooms[roomIdx].addUser(user);
+    this._rooms[roomIdx]._usersIds.push(user);
   }
 
   removeUserFromOtherRooms(user) {
-    this.rooms.map((uRoom) => {
-      const userIdxToDelete = uRoom._usersIds.findIndex(id => id._id === user._id);
-      // eslint-disable-next-line no-param-reassign
-      uRoom._usersIds = uRoom._usersIds.splice(userIdxToDelete, 0);
-      return uRoom;
+    console.log(user);
+
+    this._rooms.forEach((uRoom) => {
+      try {
+        const userIdxToDelete = uRoom._usersIds.findIndex(id => id._id === user._id);
+        if (userIdxToDelete !== -1) {
+          // eslint-disable-next-line no-param-reassign
+          uRoom._usersIds = uRoom._usersIds.splice(userIdxToDelete, 0);
+        }
+      } catch (e) {
+        throw Error(e);
+      }
     });
   }
 }
