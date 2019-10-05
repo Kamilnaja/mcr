@@ -3,6 +3,7 @@ import './app.css';
 import PropTypes from 'prop-types';
 import { SocketContext } from './SocketContext';
 import { utils } from '../utils/Utils';
+import User from './user/User';
 
 export default class UserNameForm extends Component {
   static propTypes = {
@@ -28,7 +29,12 @@ export default class UserNameForm extends Component {
     event.preventDefault();
 
     if (this.state.username !== '') {
-      localStorage.setItem('username', this.state.username);
+      const userToSave = new User(1, this.state.username);
+      console.log(userToSave);
+
+
+      localStorage.setItem('user', JSON.stringify(userToSave));
+
       this.context.emit(utils.createdNewUser, this.state.username);
       this.props.toggleFormVisible(false);
     } else {

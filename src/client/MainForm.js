@@ -1,17 +1,16 @@
 import React from 'react';
 import UserNameForm from './UserNameForm';
+import { LocalStorageService } from './LocalStorageService';
 
 export default class MainForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      isFormVisible: !localStorage.getItem('username')
+      isFormVisible: !localStorage.getItem('user')
     };
+    this.localStorageService = new LocalStorageService();
   }
-
-  handleRoomEnter = () => { }
 
   toggleFormVisible = (value) => {
     this.setState({
@@ -36,7 +35,7 @@ export default class MainForm extends React.Component {
                   <h2>Use existing username</h2>
                   <div>
                     Your current username is:
-                    {localStorage.getItem('username')}
+                    {this.localStorageService.name}
                   </div>
                   <div>
                     <button type="submit" onClick={() => this.toggleFormVisible(true)}>

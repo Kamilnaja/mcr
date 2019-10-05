@@ -26,7 +26,7 @@ export default class RoomsList extends PureComponent {
 
   addUser = (data) => {
     const payload = data;
-    payload.userName = localStorage.getItem('username');
+    payload.userName = JSON.parse(localStorage.getItem('username'))._name;
     this.context.emit(utils.roomEnter, payload);
   }
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SocketContext } from '../../SocketContext';
-import { RoomService } from './RoomService';
 import { utils } from '../../../utils/Utils';
 
 export default class Room extends React.Component {
@@ -14,12 +13,12 @@ export default class Room extends React.Component {
   constructor(props) {
     super(props);
     this.params = this.props.match.params;
-    this.service = new RoomService();
   }
 
   handleLeaveRoom = () => {
     const payload = {};
-    payload.userName = localStorage.getItem('username');
+    payload.userName = JSON.parse(localStorage.getItem('user'))._name;
+
     this.context.emit(utils.roomLeave, payload);
   }
 
