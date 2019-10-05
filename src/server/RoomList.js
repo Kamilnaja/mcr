@@ -24,14 +24,24 @@ class RoomList {
     return this._rooms;
   }
 
-  removeUserFromRoom(data) {
-    this.handleRoomAction(userAction.removeUser, data);
+  removeUserFromRoom(user) {
+
   }
 
   addUserToRoom(data) {
     const { user, room } = data;
+    this.removeUserFromOtherRooms(user);
     const roomIdx = this.rooms.findIndex(item => item._id === room.id);
-    this._rooms[roomIdx].addUser(user);
+    this.rooms[roomIdx].addUser(user);
+  }
+
+  removeUserFromOtherRooms(user) {
+    this.rooms.map((uRoom) => {
+      const userIdxToDelete = uRoom._usersIds.findIndex(id => id._id === user._id);
+      // eslint-disable-next-line no-param-reassign
+      uRoom._usersIds = uRoom._usersIds.splice(userIdxToDelete, 0);
+      return uRoom;
+    });
   }
 }
 
