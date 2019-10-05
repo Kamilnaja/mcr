@@ -24,29 +24,18 @@ class RoomList {
     return this._rooms;
   }
 
-  handleRoomAction(action, data) {
-    console.log(`data ${Object.keys(data)}`);
-
-    const idx = this.rooms.findIndex(RoomList.findUserById(data));
-    console.log(`idx ${idx}`);
-
-    if (idx !== -1) {
-      this._rooms[idx][action](data);
-    } else {
-      throw new RangeError('User with given id not found');
-    }
-  }
-
   removeUserFromRoom(data) {
     this.handleRoomAction(userAction.removeUser, data);
   }
 
   addUserToRoom(data) {
-    this.handleRoomAction(userAction.addUser, data);
+    const { user, room } = data;
+    const roomIdx = this.rooms.findIndex(item => item._id === room.id);
+    this._rooms[roomIdx].addUser(user);
   }
 }
 
-RoomList.findUserById = data => item => Number(item._id) === Number(data._id);
+RoomList.findUserById = user => item => Number(item._id) === Number(user._id);
 RoomList.findRoomWithGivenUserId = data => this.rooms.findIndex(RoomList.findUserById(data));
 
 module.exports = RoomList;

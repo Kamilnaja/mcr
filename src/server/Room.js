@@ -20,11 +20,19 @@ class Room {
   }
 
   addUser(id) {
-    if (this._usersIds.some(utils.findById)) {
-      console.log('should not add');
+    if (this.checkIfUserIsAlreadyAdded()) {
       return;
     }
     this._usersIds.push(id);
+  }
+
+  checkIfUserIsAlreadyAdded() {
+    if (this._usersIds.some(utils.findById)) {
+      console.warn('User with this id is currently in given room');
+      return true;
+    }
+    // ok
+    return false;
   }
 
   removeUser(id) {

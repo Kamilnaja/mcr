@@ -6,10 +6,10 @@ export default class MainForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isFormVisible: !localStorage.getItem('user')
-    };
     this.localStorageService = new LocalStorageService();
+    this.state = {
+      isFormVisible: this.localStorageService.isFormVisible
+    };
   }
 
   toggleFormVisible = (value) => {

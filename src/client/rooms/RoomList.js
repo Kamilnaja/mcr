@@ -4,6 +4,7 @@ import { utils } from '../../utils/Utils';
 import Room from './Room/Room';
 import { SocketContext } from '../SocketContext';
 import RoomListItem from './RoomListItem';
+import { LocalStorageService } from '../LocalStorageService';
 
 export default class RoomsList extends PureComponent {
   static contextType = SocketContext;
@@ -13,6 +14,7 @@ export default class RoomsList extends PureComponent {
     this.state = {
       rooms: []
     };
+    this.localStorageService = new LocalStorageService();
   }
 
   componentDidMount() {
@@ -25,8 +27,12 @@ export default class RoomsList extends PureComponent {
   }
 
   addUser = (data) => {
-    const payload = data;
-    payload.userName = JSON.parse(localStorage.getItem('username'))._name;
+    const payload = {};
+    payload.room = {
+      id: data._id,
+      name: data._name
+    };
+    payload.user = this.localStorageService.user;
     this.context.emit(utils.roomEnter, payload);
   }
 

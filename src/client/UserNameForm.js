@@ -29,7 +29,7 @@ export default class UserNameForm extends Component {
     event.preventDefault();
 
     if (this.state.username !== '') {
-      const userToSave = new User(1, this.state.username);
+      const userToSave = new User(Date.now(), this.state.username);
       console.log(userToSave);
 
 
