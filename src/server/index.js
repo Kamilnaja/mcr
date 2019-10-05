@@ -13,7 +13,7 @@ app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
     console.log('emitting rooms');
-    socket.emit(utils.getRooms, { roomList: roomList.createRooms() });
+    socket.emit(utils.getRooms, { roomList: roomList.rooms });
   });
 }
 
