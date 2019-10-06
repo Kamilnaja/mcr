@@ -20,3 +20,14 @@ body {
 .users-count {
   border-radius: 6px;
 }
+
+.users-list {
+  list-style-type: none;
+  padding-left: 0;
+  max-width: 600px;
+  text-align-last: left;
+}
+
+.users-list-item {
+  padding: 15px 20px;
+}

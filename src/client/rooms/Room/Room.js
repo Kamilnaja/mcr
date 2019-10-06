@@ -19,32 +19,33 @@ export default class Room extends React.Component {
   handleLeaveRoom = () => {
     const payload = {};
     payload.userName = JSON.parse(localStorage.getItem('user'))._name;
-
     this.context.emit(utils.roomLeave, payload);
-
   }
 
   render() {
     const { rooms } = this.props;
     const { id } = this.props.match.params;
     return (
-      <ul>
-        {rooms[id]
-          && rooms[id]._usersIds.map(user => (
-            <li key={user._id}>
-              {user._id}
-              {user._name}
-            </li>
-          ))}
+      <>
+        <div>
+          Hello in new Room:
+          {this.props.match.params.name}
+        </div>
+        <ul className="users-list">
+          {rooms[id]
+            && rooms[id]._usersIds.map(user => (
+              <li key={user._id} className="users-list-item">
+                {user._name}
+              </li>
+            ))}
+        </ul>
 
-        Hello in new Room:
-        {this.props.match.params.name}
         <div>
           <button type="button" onClick={this.handleLeaveRoom}>
             Opuść pokój
           </button>
         </div>
-      </ul>
+      </>
     );
   }
 }
