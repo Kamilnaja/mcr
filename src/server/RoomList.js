@@ -19,7 +19,7 @@ class RoomList {
     return this._rooms;
   }
 
-  removeUserFromRoom() {
+  removeUserFromRoom(user) {
 
   }
 
@@ -31,15 +31,12 @@ class RoomList {
   }
 
   removeUserFromOtherRooms(user) {
-    console.log(user);
 
-    this._rooms.forEach((uRoom) => {
+    this._rooms.map((uRoom) => {
       try {
-        const userIdxToDelete = uRoom._usersIds.findIndex(id => id._id === user._id);
-        if (userIdxToDelete !== -1) {
-          // eslint-disable-next-line no-param-reassign
-          uRoom._usersIds = uRoom._usersIds.splice(userIdxToDelete, 0);
-        }
+        // eslint-disable-next-line no-param-reassign
+        uRoom._usersIds = uRoom._usersIds.filter(item => item._id !== user._id);
+        return uRoom;
       } catch (e) {
         throw Error(e);
       }
