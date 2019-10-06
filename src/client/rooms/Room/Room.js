@@ -5,7 +5,8 @@ import { utils } from '../../../utils/Utils';
 
 export default class Room extends React.Component {
   static propTypes = {
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    rooms: PropTypes.array.isRequired
   }
 
   static contextType = SocketContext;
@@ -20,11 +21,22 @@ export default class Room extends React.Component {
     payload.userName = JSON.parse(localStorage.getItem('user'))._name;
 
     this.context.emit(utils.roomLeave, payload);
+
   }
 
   render() {
+    const { rooms } = this.props;
+    const { id } = this.props.match.params;
     return (
-      <div>
+      <ul>
+        {rooms[id]
+          && rooms[id]._usersIds.map(user => (
+            <li key={user._id}>
+              {user._id}
+              {user._name}
+            </li>
+          ))}
+
         Hello in new Room:
         {this.props.match.params.name}
         <div>
@@ -32,7 +44,7 @@ export default class Room extends React.Component {
             Opuść pokój
           </button>
         </div>
-      </div>
+      </ul>
     );
   }
 }

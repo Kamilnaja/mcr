@@ -55,7 +55,7 @@ export default class RoomsList extends PureComponent {
         </div>
         <Route
           path="/room/:name/:id"
-          component={Room}
+          render={props => <Room {...props} rooms={this.state.rooms} />}
         />
       </Router>
     );
