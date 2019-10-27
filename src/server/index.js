@@ -34,6 +34,8 @@ function handleNewRoomEnter(socket) {
 
 function handleRoomLeave(socket) {
   socket.on(utils.roomLeave, (data) => {
+    console.log(data);
+
     roomList.removeUserFromRoom(data);
     io.sockets.emit(utils.getRooms, { roomList: roomList.rooms });
   });

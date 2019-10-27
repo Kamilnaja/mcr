@@ -27,6 +27,8 @@ class RoomList {
   }
 
   removeUserFromRoom(user) {
+    console.log(user);
+
     this._rooms.forEach((userRoom) => {
       try {
         const givenRoom = this._rooms.find(findByObjectId(userRoom));

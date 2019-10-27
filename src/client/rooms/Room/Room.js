@@ -17,15 +17,11 @@ export default class Room extends React.Component {
   }
 
   handleLeaveRoom = () => {
-    const payload = {};
-    payload.userName = JSON.parse(localStorage.getItem('user'))._name;
-    this.context.emit(utils.roomLeave, payload);
+    this.context.emit(utils.roomLeave, JSON.parse(localStorage.getItem('user')));
   }
 
   componentWillUnmount = () => {
-    const payload = {};
-    payload.userName = JSON.parse(localStorage.getItem('user'))._name;
-    this.context.emit(utils.roomLeave, payload);
+    this.context.emit(utils.roomLeave, JSON.parse(localStorage.getItem('user')));
   }
 
   render() {
