@@ -32,7 +32,6 @@ class Room {
     console.log('removing');
     this.usersIds = this._usersIds.filter(item => !item === id);
   }
-
 }
 
 module.exports = Room;

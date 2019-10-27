@@ -4,6 +4,7 @@ const { idMaker } = require('../utils/Utils');
 class RoomList {
   constructor() {
     this._rooms = [];
+    this.createRooms();
   }
 
   get rooms() {
@@ -16,11 +17,6 @@ class RoomList {
     this._rooms.push(new Room('Hrubieszów', idx.next().value));
     this._rooms.push(new Room('Zosin', idx.next().value));
     this._rooms.push(new Room('Lublin', idx.next().value));
-    return this._rooms;
-  }
-
-  removeUserFromRoom(user) {
-
   }
 
   addUserToRoom(data) {
@@ -31,7 +27,6 @@ class RoomList {
   }
 
   removeUserFromOtherRooms(user) {
-
     this._rooms.map((uRoom) => {
       try {
         // eslint-disable-next-line no-param-reassign

@@ -40,7 +40,6 @@ function handleRoomLeave(socket) {
 }
 
 io.on('connection', (socket) => {
-  roomList.createRooms();
   handleCreateNewUser(socket);
   getRooms(socket);
   handleNewRoomEnter(socket);
