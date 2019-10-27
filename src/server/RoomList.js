@@ -1,5 +1,5 @@
 const Room = require('./Room');
-const { idMaker } = require('../utils/Utils');
+const { idMaker, findByObjectId } = require('../utils/Utils');
 
 class RoomList {
   constructor() {
@@ -21,25 +21,21 @@ class RoomList {
 
   addUserToRoom(data) {
     const { user, room } = data;
-    this.removeUserFromOtherRooms(user);
-    const roomIdx = this.rooms.findIndex(item => item._id === room.id);
+    this.removeUserFromRoom(user);
+    const roomIdx = this.rooms.findIndex(findByObjectId(room));
     this._rooms[roomIdx]._usersIds.push(user);
   }
 
-  removeUserFromOtherRooms(user) {
-    this._rooms.map((uRoom) => {
+  removeUserFromRoom(user) {
+    this._rooms.forEach((userRoom) => {
       try {
-        // eslint-disable-next-line no-param-reassign
-        uRoom._usersIds = uRoom._usersIds.filter(item => item._id !== user._id);
-        return uRoom;
+        const givenRoom = this._rooms.find(findByObjectId(userRoom));
+        givenRoom._usersIds = givenRoom._usersIds.filter(findByObjectId(user, false));
       } catch (e) {
-        throw Error(e);
+        throw new Error(e);
       }
     });
   }
 }
-
-RoomList.findUserById = user => item => Number(item._id) === Number(user._id);
-RoomList.findRoomWithGivenUserId = data => this.rooms.findIndex(RoomList.findUserById(data));
 
 module.exports = RoomList;

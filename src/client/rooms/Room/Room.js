@@ -22,6 +22,12 @@ export default class Room extends React.Component {
     this.context.emit(utils.roomLeave, payload);
   }
 
+  componentWillUnmount = () => {
+    const payload = {};
+    payload.userName = JSON.parse(localStorage.getItem('user'))._name;
+    this.context.emit(utils.roomLeave, payload);
+  }
+
   render() {
     const { rooms } = this.props;
     const { id } = this.props.match.params;

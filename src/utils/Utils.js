@@ -17,6 +17,19 @@ const idMaker = function* idMaker() {
 const findById = id => item => item === id;
 const negFindById = id => item => !item === id;
 
+const findByObjectId = (data, positive = true) => {
+  if (positive) {
+    if ('_id' in data) {
+      return item => Number(item._id) === Number(data._id);
+    }
+    return item => Number(item._id) === Number(data.id);
+  }
+  if ('_id' in data) {
+    return item => Number(item._id) !== Number(data._id);
+  }
+  return item => Number(item._id) !== Number(data.id);
+};
+
 module.exports = {
-  utils, idMaker, findById, negFindById
+  utils, idMaker, findById, negFindById, findByObjectId
 };

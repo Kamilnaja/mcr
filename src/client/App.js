@@ -3,7 +3,6 @@ import socketIOClient from 'socket.io-client';
 import { SocketContext } from './SocketContext';
 import './app.css';
 import MainForm from './MainForm';
-import RoomsList from './rooms/RoomList';
 
 export default class App extends Component {
 
