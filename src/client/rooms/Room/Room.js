@@ -14,6 +14,11 @@ export default class Room extends React.Component {
   constructor(props) {
     super(props);
     this.params = this.props.match.params;
+
+    window.addEventListener('beforeunload', (ev) => {
+      ev.preventDefault();
+      this.handleLeaveRoom();
+    });
   }
 
   handleLeaveRoom = () => {
@@ -21,8 +26,9 @@ export default class Room extends React.Component {
   }
 
   componentWillUnmount = () => {
-    this.context.emit(utils.roomLeave, JSON.parse(localStorage.getItem('user')));
+    this.handleLeaveRoom();
   }
+
 
   render() {
     const { rooms } = this.props;
