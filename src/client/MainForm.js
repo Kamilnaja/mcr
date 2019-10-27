@@ -1,6 +1,7 @@
 import React from 'react';
 import UserNameForm from './UserNameForm';
 import { LocalStorageService } from './LocalStorageService';
+import RoomsList from './rooms/RoomList';
 
 export default class MainForm extends React.Component {
 
@@ -30,21 +31,24 @@ export default class MainForm extends React.Component {
               />
             )
             : (
-              <section className="userExistingName">
-                <div>
-                  <h2>Use existing username</h2>
+              <>
+                <section className="userExistingName">
                   <div>
-                    Your current username is:
-                    {this.localStorageService.name}
+                    <h2>Use existing username</h2>
+                    <div>
+                      Your current username is:
+                      {this.localStorageService.name}
+                    </div>
+                    <div>
+                      <button type="submit" onClick={() => this.toggleFormVisible(true)}>
+                        Change
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <button type="submit" onClick={() => this.toggleFormVisible(true)}>
-                      Change
-                    </button>
-                  </div>
-                </div>
-                <hr />
-              </section>
+                  <hr />
+                </section>
+                <RoomsList />
+              </>
             )
         }
       </>

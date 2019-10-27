@@ -15,7 +15,6 @@ export default class App extends Component {
     return (
       <Provider value={socketIOClient('http://localhost:8080')}>
         <MainForm />
-        <RoomsList />
       </Provider>
     );
   }
