@@ -1,14 +1,20 @@
 const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const passport = require('passport');
+
 const { utils } = require('../utils/Utils');
 const RoomList = require('./RoomList');
 
 const roomList = new RoomList();
+const port = 8080;
 
-server.listen(8080);
+require('./routes/auth')(app, passport);
+require('./routes/base/base')(app);
+require('./config')(app, passport);
 
-app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`));
+server.listen(port);
+
 
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
