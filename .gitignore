@@ -6,3 +6,5 @@ yarn.lock
 todo.md
 cheatsheet.md
 todo.todo
+src/server/config/config.js
+:memory
