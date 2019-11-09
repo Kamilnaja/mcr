@@ -18,6 +18,7 @@
     "no-underscore-dangle": "off",
     "no-plusplus": "off",
     "react/forbid-prop-types": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "consistent-return": "off"
   }
 }

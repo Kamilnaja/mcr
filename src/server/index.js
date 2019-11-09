@@ -1,10 +1,10 @@
 const app = require('express')();
 const server = require('http').Server(app);
+const morgan = require('morgan');
+const passport = require('passport');
 const io = require('socket.io')(server);
 const RoomList = require('./RoomList');
-const auth = require('./routes/auth');
-const morgan = require('morgan');
-
+require('./passport');
 const { utils } = require('../utils/Utils');
 
 const roomList = new RoomList();
@@ -12,8 +12,35 @@ const port = 8080;
 
 server.listen(port);
 
-app.use('/', auth)
+// Passport session setup.
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
 app.use(morgan('combined'));
+
+app.get('/', (req, res) => {
+  res.json({
+    message: 'welcome in main'
+  });
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+app.get('/account', ensureAuthenticated, (req, res) => {
+  res.send('account');
+});
 
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {

@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "kill-port": "^1.6.0",
     "morgan": "^1.9.1",
+    "mysql": "^2.17.1",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "passport-facebook-token": "^3.3.0",
