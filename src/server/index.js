@@ -1,13 +1,19 @@
 const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const { utils } = require('../utils/Utils');
 const RoomList = require('./RoomList');
+const auth = require('./routes/auth');
+const morgan = require('morgan');
+
+const { utils } = require('../utils/Utils');
 
 const roomList = new RoomList();
 const port = 8080;
 
 server.listen(port);
+
+app.use('/', auth)
+app.use(morgan('combined'));
 
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
