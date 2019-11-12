@@ -10,7 +10,6 @@ const pool = mysql.createPool({
   database: config.database
 });
 
-
 passport.use(new FacebookTokenStrategy({
   clientID: config.facebookAuth.clientID,
   clientSecret: config.facebookAuth.clientSecret
