@@ -4,26 +4,16 @@ const morgan = require('morgan');
 const passport = require('passport');
 const mysql = require('mysql');
 const io = require('socket.io')(server);
-const FacebookTokenStrategy = require('passport-facebook-token');
-const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./config');
 
 const RoomList = require('./RoomList');
-require('./passport');
 const { utils } = require('../utils/Utils');
-
-const pool = mysql.createPool({
-  host: config.host,
-  user: config.username,
-  password: config.password,
-  database: config.database
-});
+require('./passport');
 
 const roomList = new RoomList();
 const port = 8080;
 
-server.listen(port);
-
+app.use(passport.initialize());
 // Passport session setup.
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -32,28 +22,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
-
-passport.use(new FacebookStrategy({
-  clientID: config.facebookAuth.clientID,
-  clientSecret: config.facebookAuth.clientSecret
-}, (accessToken, refreshToken, profile, done) => {
-  process.nextTick(() => {
-    if (config.use_database) {
-      console.log('use db');
-
-      pool.query(`SELECT * from user_info where user_id=${profile.id}`, (err, rows) => {
-        if (err) throw err;
-        if (rows && rows.length === 0) {
-          console.log('There is no such user, adding now');
-          pool.query(`INSERT into user_info(user_id,user_name) VALUES('${profile.id}','${profile.username}')`);
-        } else {
-          console.log('User already exists in database');
-        }
-      });
-    }
-    return done(null, profile);
-  });
-}));
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -64,11 +32,23 @@ function ensureAuthenticated(req, res, next) {
 
 app.use(morgan('combined'));
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/account', ensureAuthenticated, (req, res) => {
   res.send('account');
 });
+
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
+  (req, res) => {
+    console.log('req', req.user);
+    res.json({
+      status: 'ok'
+    });
+  }
+);
+
 
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
@@ -105,3 +85,5 @@ io.on('connection', (socket) => {
   watchNewRoomEnter(socket);
   listenRoomLeave(socket);
 });
+
+server.listen(port);
