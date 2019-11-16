@@ -2,6 +2,7 @@ import React from 'react';
 import UserNameForm from './UserNameForm';
 import { LocalStorageService } from './LocalStorageService';
 import RoomsList from './rooms/RoomList';
+import Header from './Header';
 
 export default class MainForm extends React.Component {
 
@@ -22,6 +23,7 @@ export default class MainForm extends React.Component {
   render() {
     return (
       <>
+      <Header></Header>
         {
           this.state.isFormVisible
             ? (

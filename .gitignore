@@ -8,3 +8,4 @@ cheatsheet.md
 todo.todo
 src/server/config/config.js
 :memory
+src/server/config.js
