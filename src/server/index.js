@@ -2,13 +2,11 @@ const app = require('express')();
 const server = require('http').Server(app);
 const morgan = require('morgan');
 const passport = require('passport');
-const mysql = require('mysql');
 const io = require('socket.io')(server);
-const config = require('./config');
-
+const auth = require('./routes/auth');
 const RoomList = require('./RoomList');
 const { utils } = require('../utils/Utils');
-require('./passport');
+require('./security');
 
 const roomList = new RoomList();
 const port = 8080;
@@ -32,23 +30,12 @@ function ensureAuthenticated(req, res, next) {
 
 app.use(morgan('combined'));
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/account', ensureAuthenticated, (req, res) => {
   res.send('account');
 });
 
-app.get(
-  '/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
-  (req, res) => {
-    console.log('req', req.user);
-    res.json({
-      status: 'ok'
-    });
-  }
-);
-
+app.use('/', auth);
 
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
