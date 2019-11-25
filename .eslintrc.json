@@ -19,6 +19,8 @@
     "no-plusplus": "off",
     "react/forbid-prop-types": "off",
     "class-methods-use-this": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "arrow-parens": "off",
+    "arrow-body-style": "off"
   }
 }

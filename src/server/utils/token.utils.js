@@ -17,7 +17,7 @@ const generateToken = (req, res, next) => {
   return next();
 };
 
-const sendToken = (req, send) => {
+const sendToken = (req, res) => {
   res.sendHeader('x-auth-token', req.token);
   return res.status(200).send(JSON.stringify(req.user));
 };

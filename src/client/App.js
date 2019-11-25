@@ -5,8 +5,7 @@ import './app.css';
 import MainForm from './MainForm';
 
 export default class App extends Component {
-
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     const { Provider } = SocketContext;

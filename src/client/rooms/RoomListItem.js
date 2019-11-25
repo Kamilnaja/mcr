@@ -7,7 +7,10 @@ export default function RoomListItem(props) {
     <div>
       <li key={props.item._id}>
         <div className="room-item">
-          <Link to={`/room/${props.item._name}/${props.item._id}`} onClick={() => props.addUser(props.item)}>
+          <Link
+            to={`/room/${props.item._name}/${props.item._id}`}
+            onClick={() => props.addUser(props.item)}
+          >
             {props.item._name}
           </Link>
           <div>

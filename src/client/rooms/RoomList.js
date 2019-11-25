@@ -19,14 +19,14 @@ export default class RoomsList extends PureComponent {
 
   componentDidMount() {
     this.context.emit(utils.getRooms);
-    this.context.on(utils.getRooms, (data) => {
+    this.context.on(utils.getRooms, data => {
       this.setState({
         rooms: data.roomList
       });
     });
   }
 
-  addUser = (data) => {
+  addUser = data => {
     const payload = {};
     payload.room = {
       id: data._id,
@@ -34,7 +34,7 @@ export default class RoomsList extends PureComponent {
     };
     payload.user = this.localStorageService.user;
     this.context.emit(utils.roomEnter, payload);
-  }
+  };
 
   render() {
     return (
@@ -42,15 +42,9 @@ export default class RoomsList extends PureComponent {
         <div>
           <h2>Lista dostępnych pokoi</h2>
           <ul className="room-items-list">
-            {
-              this.state.rooms.map(item => (
-                <RoomListItem
-                  item={item}
-                  key={item._id}
-                  addUser={this.addUser}
-                />
-              ))
-            }
+            {this.state.rooms.map(item => (
+              <RoomListItem item={item} key={item._id} addUser={this.addUser} />
+            ))}
           </ul>
         </div>
         <Route

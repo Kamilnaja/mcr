@@ -7,8 +7,8 @@ import User from './user/User';
 
 export default class UserNameForm extends Component {
   static propTypes = {
-    toggleFormVisible: PropTypes.func.isRequired,
-  }
+    toggleFormVisible: PropTypes.func.isRequired
+  };
 
   static contextType = SocketContext;
 
@@ -19,19 +19,18 @@ export default class UserNameForm extends Component {
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       username: event.target.value
     });
-  }
+  };
 
-  handleUserSubmit = (event) => {
+  handleUserSubmit = event => {
     event.preventDefault();
 
     if (this.state.username !== '') {
       const userToSave = new User(Date.now(), this.state.username);
       console.log(userToSave);
-
 
       localStorage.setItem('user', JSON.stringify(userToSave));
 
@@ -40,7 +39,7 @@ export default class UserNameForm extends Component {
     } else {
       console.log('Please enter your username');
     }
-  }
+  };
 
   render() {
     return (
@@ -49,7 +48,12 @@ export default class UserNameForm extends Component {
           <form onSubmit={this.handleUserSubmit}>
             <label htmlFor="username">
               Please enter your name
-              <input type="text" id="username" onChange={this.handleChange} value={this.state.username} />
+              <input
+                type="text"
+                id="username"
+                onChange={this.handleChange}
+                value={this.state.username}
+              />
             </label>
             <button type="submit">Submit</button>
           </form>

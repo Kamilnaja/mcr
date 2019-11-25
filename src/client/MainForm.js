@@ -13,7 +13,7 @@ export default class MainForm extends React.Component {
     };
   }
 
-  toggleFormVisible = (value) => {
+  toggleFormVisible = value => {
     this.setState({
       isFormVisible: value
     });
