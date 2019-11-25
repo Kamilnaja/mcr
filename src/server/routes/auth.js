@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const passport = require('passport');
 
@@ -6,7 +7,10 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 
 router.get(
   '/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }),
   (req, res) => {
     console.log('req', req.user);
     res.json({

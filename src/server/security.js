@@ -15,4 +15,11 @@ passport.use(new FacebookStrategy({
   clientID: config.clientID,
   clientSecret: config.clientSecret,
   callbackURL: 'http://localhost:8080/auth/facebook/callback'
-}, (accessToken, refreshToken, profile, cb) => cb(null, profile)));
+}, (accessToken, refreshToken, profile, cb) => {
+  process.nextTick(() => {
+    if (config.use_database) {
+      console.log('using db');
+    }
+    return cb(null, profile);
+  });
+}));

@@ -10,7 +10,7 @@
     "server": "forever -w ./src/server/index.js",
     "dev": "concurrently \"forever -w ./src/server/index.js \" \"npm run client\""
   },
-  "author": "Sandeep Raveesh",
+  "author": "Naja",
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -26,6 +26,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-facebook-login": "^4.1.1",
     "react-router-dom": "^5.0.1",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",

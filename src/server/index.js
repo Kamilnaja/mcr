@@ -12,7 +12,7 @@ const roomList = new RoomList();
 const port = 8080;
 
 app.use(passport.initialize());
-// Passport session setup.
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -30,6 +30,9 @@ function ensureAuthenticated(req, res, next) {
 
 app.use(morgan('combined'));
 
+app.get('/', (req, res) => {
+  res.send('main');
+});
 
 app.get('/account', ensureAuthenticated, (req, res) => {
   res.send('account');
