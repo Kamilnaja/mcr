@@ -30,6 +30,22 @@ const findByObjectId = (data, positive = true) => {
   return item => Number(item._id) !== Number(data.id);
 };
 
+const normalizePort = (val) => {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
 module.exports = {
-  utils, idMaker, findById, negFindById, findByObjectId
+  utils, idMaker, findById, negFindById, findByObjectId, normalizePort
 };

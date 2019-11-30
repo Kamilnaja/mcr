@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { generateToken, sendToken } = require("../utils/token.utils");
+var { generateToken, sendToken } = require("../../utils/token.utils");
 var passport = require("passport");
 var request = require("request");
 require("../passport")();

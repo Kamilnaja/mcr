@@ -22,7 +22,7 @@ export default class MainForm extends React.Component {
   render() {
     return (
       <>
-        <Header></Header>
+        <Header />
         {this.state.isFormVisible ? (
           <UserNameForm
             isSubmitted={this.state.isSubmitted}

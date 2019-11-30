@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
+    "node:server": "node ./src/server/bin/www.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "forever -w --minUptime=2000 --spinSleepTime=2000 ./src/server/bin/www.js",
     "dev": "concurrently \"forever -w ./src/server/index.js \" \"npm run client\""
