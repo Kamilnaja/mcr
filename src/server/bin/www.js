@@ -2,15 +2,17 @@
 const http = require('http');
 const { normalizePort } = require('../../utils/Utils');
 const app = require('../app');
-const utils = require('../../utils/Utils');
-const roomList = require('./../RoomList');
+const { utils } = require('../../utils/Utils');
+const RoomList = require('./../RoomList');
 
 const port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 const io = require('socket.io')(server);
-var expressServerUtils = require('express-server-utils')(server, port);
+const expressServerUtils = require('express-server-utils')(server, port);
+
+const roomList = new RoomList();
 
 function getRooms(socket) {
   socket.on(utils.getRooms, () => {
@@ -42,7 +44,6 @@ function listenRoomLeave(socket) {
 }
 
 io.on('connection', socket => {
-  console.log('conn');
   handleCreateNewUser(socket);
   getRooms(socket);
   watchNewRoomEnter(socket);
