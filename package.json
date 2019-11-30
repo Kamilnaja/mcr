@@ -8,14 +8,15 @@
     "start": "npm run build && node src/server/index.js",
     "node:server": "node ./src/server/bin/www.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "forever -w --minUptime=2000 --spinSleepTime=2000 ./src/server/bin/www.js",
-    "dev": "concurrently \"forever -w ./src/server/index.js \" \"npm run client\""  
+    "server": "forever -w --minUptime=2000 --spinSleepTime=2000 ./src/server/index.js",
+    "dev": "concurrently \"forever -w ./src/server/index.js \" \"npm run client\""
   },
   "author": "Naja",
   "license": "ISC",
   "dependencies": {
     "@types/jest": "^24.0.23",
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "debug": "^4.1.1",

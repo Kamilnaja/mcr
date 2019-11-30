@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /* eslint-disable import/order */
 const http = require('http');
-const { normalizePort } = require('../../utils/Utils');
-const app = require('../app');
-const RoomList = require('./../RoomList');
-const { utils } = require('../../utils/Utils');
+const { normalizePort } = require('../utils/Utils');
+const app = require('./app');
+const RoomList = require('./RoomList');
+const { utils } = require('../utils/Utils');
 
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -39,8 +39,6 @@ function watchNewRoomEnter(socket) {
 
 function listenRoomLeave(socket) {
   socket.on(utils.roomLeave, data => {
-    console.log(data);
-
     roomList.removeUserFromRoom(data);
     io.sockets.emit(utils.getRooms, { roomList: roomList.rooms });
   });

@@ -1,10 +1,10 @@
-export class LocalStorageService {
+export class StorageService {
   get name() {
     return JSON.parse(localStorage.getItem('user'))._name;
   }
 
   get user() {
-    return JSON.parse(localStorage.getItem('user'));
+    return sessionStorage.getItem('user');
   }
 
   get isFormVisible() {

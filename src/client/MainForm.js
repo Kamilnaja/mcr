@@ -1,12 +1,12 @@
 import React from 'react';
-import { LocalStorageService } from './LocalStorageService';
+import { StorageService } from './StorageService';
 import RoomsList from './rooms/RoomList';
 import Header from './Header';
 
 export default class MainForm extends React.Component {
   constructor(props) {
     super(props);
-    this.localStorageService = new LocalStorageService();
+    this.localStorageService = new StorageService();
   }
 
   render() {

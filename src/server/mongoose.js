@@ -1,34 +1,16 @@
-"use strict";
+const mongoose = require('mongoose');
 
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-module.exports = function() {
-  var db = mongoose.connect("mongodb://localhost:27017/social-auth-example");
+module.exports = () => {
+  const db = mongoose.connect('mongodb://localhost:27017/social-auth-example', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  });
 
-  var UserSchema = new Schema({
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-      match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    },
+  const UserSchema = new Schema({
     facebookProvider: {
-      type: {
-        id: String,
-        token: String
-      },
-      select: false
-    },
-    twitterProvider: {
-      type: {
-        id: String,
-        token: String
-      },
-      select: false
-    },
-    googleProvider: {
       type: {
         id: String,
         token: String
@@ -37,23 +19,24 @@ module.exports = function() {
     }
   });
 
-  UserSchema.set("toJSON", { getters: true, virtuals: true });
+  UserSchema.set('toJSON', { getters: true, virtuals: true });
 
-    UserSchema.statics.upsertFbUser = function(
+  // eslint-disable-next-line func-names
+  UserSchema.statics.upsertFbUser = function(
     accessToken,
     refreshToken,
     profile,
     cb
   ) {
-    var that = this;
+    const That = this;
     return this.findOne(
       {
-        "facebookProvider.id": profile.id
+        'facebookProvider.id': profile.id
       },
-      function(err, user) {
+      (err, user) => {
         // no user was found, lets create a new one
         if (!user) {
-          var newUser = new that({
+          const newUser = new That({
             fullName: profile.displayName,
             email: profile.emails[0].value,
             facebookProvider: {
@@ -62,7 +45,7 @@ module.exports = function() {
             }
           });
 
-          newUser.save(function(error, savedUser) {
+          newUser.save((error, savedUser) => {
             if (error) {
               console.log(error);
             }
@@ -75,8 +58,7 @@ module.exports = function() {
     );
   };
 
-
-  mongoose.model("User", UserSchema);
+  mongoose.model('User', UserSchema);
 
   return db;
 };

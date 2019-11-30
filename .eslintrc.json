@@ -21,6 +21,7 @@
     "class-methods-use-this": "off",
     "consistent-return": "off",
     "arrow-parens": "off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "space-before-function-paren": "off"
   }
 }
