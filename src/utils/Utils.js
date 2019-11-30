@@ -6,6 +6,9 @@ const utils = {
   roomLeave: 'roomLeave'
 };
 
+const url = {
+  fb: 'http://localhost:8080/api/v1/auth/facebook'
+};
 
 const idMaker = function* idMaker() {
   let idx = 0;
@@ -30,7 +33,7 @@ const findByObjectId = (data, positive = true) => {
   return item => Number(item._id) !== Number(data.id);
 };
 
-const normalizePort = (val) => {
+const normalizePort = val => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -44,8 +47,14 @@ const normalizePort = (val) => {
   }
 
   return false;
-}
+};
 
 module.exports = {
-  utils, idMaker, findById, negFindById, findByObjectId, normalizePort
+  utils,
+  idMaker,
+  findById,
+  negFindById,
+  findByObjectId,
+  normalizePort,
+  url
 };

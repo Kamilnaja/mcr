@@ -2,27 +2,33 @@
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import { url } from '../utils/Utils';
 
 class Header extends Component {
   constructor() {
     super();
-    this.state = {
-      isAuthenticated: false,
-      user: null,
-      token: ''
-    };
+    if (sessionStorage.getItem('user')) {
+      this.state = {
+        isAuthenticated: true,
+        user: sessionStorage.getItem('user')
+      };
+    } else {
+      this.state = {
+        isAuthenticated: false,
+        user: null
+      };
+    }
   }
 
   logout = () => {
-    this.setState = {
+    this.setState({
       isAuthenticated: false,
-      token: '',
       user: null
-    };
+    });
+    sessionStorage.removeItem('user');
   };
 
   facebookResponse = response => {
-    console.log(response);
     const tokenBlob = new Blob(
       [
         JSON.stringify(
@@ -41,15 +47,15 @@ class Header extends Component {
       mode: 'cors',
       cache: 'default'
     };
-    fetch('http://localhost:8080/api/v1/auth/facebook', options).then((res) => {
+    fetch(url.fb, options).then(res => {
       const token = res.headers.get('x-auth-token');
       res.json().then(user => {
         if (token) {
           this.setState({
             isAuthenticated: true,
-            user,
-            token
+            user: user.email
           });
+          sessionStorage.setItem('user', user.email);
         }
       });
     });
@@ -58,8 +64,8 @@ class Header extends Component {
   render() {
     const content = this.state.isAuthenticated ? (
       <div>
-        <p>Authenticated</p>
-        <div>{this.state.user.email}</div>
+        <p>Jesteś zalogowany jako:</p>
+        <div>{this.state.user}</div>
         <button type="button" onClick={this.logout}>
           Logout
         </button>

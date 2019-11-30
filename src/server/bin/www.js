@@ -1,16 +1,19 @@
 #!/usr/bin/env node
+/* eslint-disable import/order */
 const http = require('http');
 const { normalizePort } = require('../../utils/Utils');
 const app = require('../app');
-const { utils } = require('../../utils/Utils');
 const RoomList = require('./../RoomList');
-
-const port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
+const { utils } = require('../../utils/Utils');
 
 const server = http.createServer(app);
 const io = require('socket.io')(server);
+
+const port = normalizePort(process.env.PORT || '8080');
 const expressServerUtils = require('express-server-utils')(server, port);
+
+app.set('port', port);
+
 
 const roomList = new RoomList();
 
