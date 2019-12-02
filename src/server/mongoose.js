@@ -3,11 +3,21 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 module.exports = () => {
-  const db = mongoose.connect('mongodb://localhost:27017/social-auth-example', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-  });
+  const db = mongoose.connect(
+    'mongodb://localhost:27017/social-auth-example',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
+    },
+    (err) => {
+      if (err) {
+        console.log('Unable to connect the server. Please start the db server');
+      } else {
+        console.log('succesfully connected to db');
+      }
+    }
+  );
 
   const UserSchema = new Schema({
     facebookProvider: {
