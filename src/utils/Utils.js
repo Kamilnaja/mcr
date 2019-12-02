@@ -3,7 +3,8 @@ const utils = {
   getRooms: 'getRooms',
   alert: 'alert',
   roomEnter: 'roomEnter',
-  roomLeave: 'roomLeave'
+  roomLeave: 'roomLeave',
+  getNewUser: 'getNewUser'
 };
 
 const url = {
