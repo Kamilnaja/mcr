@@ -14,7 +14,6 @@ const expressServerUtils = require('express-server-utils')(server, port);
 
 app.set('port', port);
 
-
 const roomList = new RoomList();
 
 function getRooms(socket) {
@@ -25,6 +24,7 @@ function getRooms(socket) {
 
 function handleCreateNewUser(socket) {
   socket.on(utils.createdNewUser, data => {
+    // todo - change string into fn
     io.sockets.emit('getNewUser', { data });
     socket.emit('getNewUser', { data });
   });

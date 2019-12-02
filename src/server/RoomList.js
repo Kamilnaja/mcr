@@ -30,7 +30,7 @@ class RoomList {
     this._rooms.forEach((userRoom) => {
       try {
         const givenRoom = this._rooms.find(findByObjectId(userRoom));
-        givenRoom._usersIds = givenRoom._usersIds.filter(findByObjectId(user, false));
+        givenRoom._usersIds = givenRoom._usersIds.filter(item => item !== user);
       } catch (e) {
         throw new Error(e);
       }
